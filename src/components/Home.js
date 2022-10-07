@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   state = {
@@ -13,6 +14,7 @@ class Home extends Component {
     const { searchProduct } = this.state;
     return (
       <div>
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
         <input type="text" onChange={ this.handleChange } />
         {(searchProduct === '')
           ? (
