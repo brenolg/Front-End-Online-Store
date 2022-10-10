@@ -39,7 +39,9 @@ class Home extends Component {
   };
 
   render() {
-    const { productList, searched, listOfCategories } = this.state;
+    const { productList,
+      searched,
+      listOfCategories } = this.state;
     return (
       <div>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
