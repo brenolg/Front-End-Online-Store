@@ -38,7 +38,6 @@ class ProductDetails extends Component {
               data-testid="shopping-cart-button"
             >
               Carrinho de Compras
-
             </Link>
           </button>
         </div>
