@@ -8,7 +8,8 @@ class Home extends Component {
     searchProduct: '',
     productList: [],
     searched: false,
-    listOfProduct: [],
+    listOfCategories: [],
+    selectedCat: '',
   };
 
   componentDidMount() {
@@ -17,20 +18,20 @@ class Home extends Component {
 
   createListButtons = async () => {
     const search = await getCategories();
-    this.setState({ listOfProduct: search });
+    this.setState({ listOfCategories: search });
   };
 
   handleChange = ({ target }) => {
-    this.setState({ searchProduct: target.value });
+    this.setState({ [target.name]: target.value });
+    if (target.type === 'radio') {
+      this.searchButton();
+    }
   };
 
   searchButton = async () => {
-    const { searchProduct } = this.state;
-    let productList = await getProductsFromCategoryAndQuery('', searchProduct);
-    console.log(productList);
-
+    const { searchProduct, selectedCat } = this.state;
+    let productList = await getProductsFromCategoryAndQuery(selectedCat, searchProduct);
     productList = productList.results;
-    console.log(searchProduct, productList);
     this.setState({
       productList,
       searched: true,
@@ -38,12 +39,17 @@ class Home extends Component {
   };
 
   render() {
-    const { productList, searched, listOfProduct } = this.state;
+    const { productList, searched, listOfCategories } = this.state;
     return (
       <div>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
         <form>
-          <input type="text" onChange={ this.handleChange } data-testid="query-input" />
+          <input
+            type="text"
+            onChange={ this.handleChange }
+            data-testid="query-input"
+            name="searchProduct"
+          />
           <button
             type="button"
             data-testid="query-button"
@@ -52,6 +58,24 @@ class Home extends Component {
             Buscar
           </button>
         </form>
+        <div>
+          {listOfCategories.map((cat, index) => (
+            <label
+              htmlFor={ cat.id }
+              key={ index }
+            >
+              {cat.name}
+              <input
+                data-testid="category"
+                value={ cat.id }
+                onChange={ this.handleChange }
+                name="selectedCategory"
+                type="radio"
+                id={ cat.id }
+              />
+            </label>
+          ))}
+        </div>
         {(!searched)
           ? (
             <span data-testid="home-initial-message">
@@ -63,23 +87,6 @@ class Home extends Component {
                 ? <p>Nenhum produto foi encontrado</p>
                 : <FoundProducts { ...this.state } />}
             </div>)}
-        <div>
-
-          {listOfProduct.map((cat, index) => (
-            <label
-              htmlFor={ cat.id }
-              key={ index }
-            >
-              {cat.name}
-              <input
-                data-testid="category"
-                name="index"
-                type="radio"
-                id={ cat.id }
-              />
-            </label>
-          ))}
-        </div>
       </div>
     );
   }
