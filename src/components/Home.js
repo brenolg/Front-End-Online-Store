@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import FoundProducts from './FoundProducts';
@@ -42,6 +43,7 @@ class Home extends Component {
     const { productList,
       searched,
       listOfCategories } = this.state;
+    const { addToCar } = this.props;
     return (
       <div>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
@@ -87,11 +89,15 @@ class Home extends Component {
             <div>
               { productList.length < 1
                 ? <p>Nenhum produto foi encontrado</p>
-                : <FoundProducts { ...this.state } />}
+                : <FoundProducts { ...this.state } addToCar={ addToCar } />}
             </div>)}
       </div>
     );
   }
 }
+
+Home.propTypes = {
+  addToCar: PropTypes.func.isRequired,
+};
 
 export default Home;
