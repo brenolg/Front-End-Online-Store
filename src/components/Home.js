@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getProductsFromCategoryAndQuery/* , getCategories */ } from '../services/api';
+import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import FoundProducts from './FoundProducts';
 
 class Home extends Component {
@@ -8,6 +8,16 @@ class Home extends Component {
     searchProduct: '',
     productList: [],
     searched: false,
+    listOfProduct: [],
+  };
+
+  componentDidMount() {
+    this.createListButtons();
+  }
+
+  createListButtons = async () => {
+    const search = await getCategories();
+    this.setState({ listOfProduct: search });
   };
 
   handleChange = ({ target }) => {
@@ -28,7 +38,7 @@ class Home extends Component {
   };
 
   render() {
-    const { productList, searched } = this.state;
+    const { productList, searched, listOfProduct } = this.state;
     return (
       <div>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
@@ -53,6 +63,23 @@ class Home extends Component {
                 ? <p>Nenhum produto foi encontrado</p>
                 : <FoundProducts { ...this.state } />}
             </div>)}
+        <div>
+
+          {listOfProduct.map((cat, index) => (
+            <label
+              htmlFor={ cat.id }
+              key={ index }
+            >
+              {cat.name}
+              <input
+                data-testid="category"
+                name="index"
+                type="radio"
+                id={ cat.id }
+              />
+            </label>
+          ))}
+        </div>
       </div>
     );
   }
