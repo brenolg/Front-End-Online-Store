@@ -39,7 +39,7 @@ class Home extends Component {
           {listOfProduct.map((cat, index) => (
 
             <label
-              htmlFor="index"
+              htmlFor={ cat.id }
               key={ index }
             >
               {cat.name}
@@ -47,7 +47,7 @@ class Home extends Component {
                 data-testid="category"
                 name="index"
                 type="radio"
-                id="index"
+                id={ cat.id }
               />
             </label>
           ))}
