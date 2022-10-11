@@ -3,25 +3,22 @@ import PropTypes from 'prop-types';
 import CartItemCard from './CartItemCard';
 
 class Cart extends Component {
-  state = {
-    cartList: [],
-  };
-
   render() {
-    const { cartList } = this.state;
-    const { favoriteList } = this.props;
+    const { favoriteList, addToCar, decreaseQuantity, removeCartItem } = this.props;
     return (
       <div>
-        { cartList.length < 1
+        { favoriteList.length < 1
           ? <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
-          : <span>{cartList}</span> }
-        {favoriteList.map((favorito) => (
-          <CartItemCard
-            key={ favorito.title }
-            favorito={ favorito }
-            quantidadeItens={ this.quantidadeItens }
-          />
-        ))}
+          : favoriteList.map((favorito) => (
+            <CartItemCard
+              key={ favorito.title }
+              favorito={ favorito }
+              quantidadeItens={ this.quantidadeItens }
+              addToCar={ addToCar }
+              decreaseQuantity={ decreaseQuantity }
+              removeCartItem={ removeCartItem }
+            />
+          ))}
       </div>
     );
   }
@@ -34,6 +31,9 @@ Cart.propTypes = {
     title: PropTypes.string.isRequired,
     qtde: PropTypes.number.isRequired,
   })).isRequired,
+  addToCar: PropTypes.func.isRequired,
+  decreaseQuantity: PropTypes.func.isRequired,
+  removeCartItem: PropTypes.func.isRequired,
 };
 
 export default Cart;
