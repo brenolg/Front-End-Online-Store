@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CartItemCard from './CartItemCard';
 
 class Cart extends Component {
   state = {
     cartList: [],
-  };
-
-  quantidadeItens = (title) => {
-    const { favoriteList } = this.props;
-    const quantidade = favoriteList.filter((favorito) => favorito.title === title);
-    return quantidade.length;
   };
 
   render() {
@@ -21,14 +16,12 @@ class Cart extends Component {
           ? <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
           : <span>{cartList}</span> }
         {favoriteList.map((favorito) => (
-          <div key={ favorito.title }>
-            <img src={ favorito.img } alt={ favorito.title } />
-            <p>{favorito.price}</p>
-            <p data-testid="shopping-cart-product-name">{favorito.title}</p>
-            <p data-testid="shopping-cart-product-quantity">
-              {this.quantidadeItens(favorito.title)}
-            </p>
-          </div>))}
+          <CartItemCard
+            key={ favorito.title }
+            favorito={ favorito }
+            quantidadeItens={ this.quantidadeItens }
+          />
+        ))}
       </div>
     );
   }
@@ -39,6 +32,7 @@ Cart.propTypes = {
     img: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    qtde: PropTypes.number.isRequired,
   })).isRequired,
 };
 

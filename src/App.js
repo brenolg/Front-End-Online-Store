@@ -14,16 +14,26 @@ class App extends Component {
   }
 
   addToCar = ({ target }) => {
+    const { favoriteList } = this.state;
     const { parentElement: { children } } = target;
     const [img, price, title] = children;
+    let qtdeSalva = 0;
+    const itemNaLista = favoriteList.find((favorito) => favorito.title === title.id);
+    const outrosItens = favoriteList.filter((favorito) => favorito.title !== title.id);
+    if (itemNaLista !== undefined) {
+      qtdeSalva = itemNaLista.qtde;
+    } else {
+      qtdeSalva = 0;
+    }
     const novoFavorito = {
       img: img.src,
       price: price.id,
       title: title.id,
+      qtde: qtdeSalva + 1,
     };
-    this.setState((prevState) => ({
-      favoriteList: [...prevState.favoriteList, novoFavorito],
-    }));
+    this.setState({
+      favoriteList: [...outrosItens, novoFavorito],
+    });
   };
 
   render() {
