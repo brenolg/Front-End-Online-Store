@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { getProductById } from '../services/api';
 
 class FoundProducts extends Component {
+  handleClick = async ({ target }) => {
+    const result = await getProductById(target.id);
+    console.log(target);
+    return result;
+  };
+
   render() {
     const { productList, addToCar } = this.props;
     return (
@@ -17,6 +25,18 @@ class FoundProducts extends Component {
               data-testid="product-add-to-cart"
             >
               Adicionar ao Carrinho
+            </button>
+            <button
+              type="button"
+              onClick={ this.handleClick }
+            >
+              <Link
+                to={ `/product-details/${produto.id}` }
+                data-testid="product-detail-link"
+                id={ produto.id }
+              >
+                Detalhes do Produto
+              </Link>
             </button>
           </div>)) }
       </div>
