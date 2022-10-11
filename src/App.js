@@ -14,6 +14,18 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    const favoriteList = JSON.parse(localStorage.getItem('favoriteList'));
+    if (favoriteList !== null) {
+      this.setState({ favoriteList });
+    }
+  }
+
+  saveLocalStorage = () => {
+    const { favoriteList } = this.state;
+    localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
+  };
+
   addToCar = ({ target }) => {
     const { favoriteList } = this.state;
     const { parentElement: { children } } = target;
@@ -34,7 +46,38 @@ class App extends Component {
     };
     this.setState({
       favoriteList: [...outrosItens, novoFavorito],
-    });
+    }, () => this.saveLocalStorage());
+  };
+
+  decreaseQuantity = ({ target }) => {
+    const { favoriteList } = this.state;
+    const { parentElement: { children } } = target;
+    const [img, price, title] = children;
+    let qtdeSalva;
+    const itemNaLista = favoriteList.find((favorito) => favorito.title === title.id);
+    const outrosItens = favoriteList.filter((favorito) => favorito.title !== title.id);
+    if (itemNaLista.qtde > 0) {
+      qtdeSalva = itemNaLista.qtde - 1;
+    } else {
+      qtdeSalva = 0;
+    }
+    const novoFavorito = {
+      img: img.src,
+      price: price.id,
+      title: title.id,
+      qtde: qtdeSalva,
+    };
+    this.setState({
+      favoriteList: [...outrosItens, novoFavorito],
+    }, () => this.saveLocalStorage());
+  };
+
+  removeCartItem = ({ target }) => {
+    const { favoriteList } = this.state;
+    const { parentElement: { children } } = target;
+    const [img] = children;
+    const newFavList = favoriteList.filter((favorito) => favorito.title !== img.alt);
+    this.setState({ favoriteList: newFavList });
   };
 
   render() {
@@ -43,7 +86,14 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route path="/cart"><Cart favoriteList={ favoriteList } /></Route>
+            <Route path="/cart">
+              <Cart
+                favoriteList={ favoriteList }
+                addToCar={ this.addToCar }
+                decreaseQuantity={ this.decreaseQuantity }
+                removeCartItem={ this.removeCartItem }
+              />
+            </Route>
             <Route exact path="/">
               <Home addToCar={ this.addToCar } />
             </Route>
