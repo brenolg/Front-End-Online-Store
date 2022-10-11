@@ -77,7 +77,8 @@ class App extends Component {
     const { parentElement: { children } } = target;
     const [img] = children;
     const newFavList = favoriteList.filter((favorito) => favorito.title !== img.alt);
-    this.setState({ favoriteList: newFavList });
+    this.setState({ favoriteList: newFavList }, () => this.saveLocalStorage());
+    localStorage.clear();
   };
 
   render() {
