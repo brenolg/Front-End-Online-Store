@@ -47,7 +47,12 @@ class App extends Component {
             <Route exact path="/">
               <Home addToCar={ this.addToCar } />
             </Route>
-            <Route path="/product-details/:id" component={ ProductDetails } />
+            <Route
+              path="/product-details/:id"
+              render={ (props) => (
+                <ProductDetails { ...props } addToCar={ this.addToCar } />
+              ) }
+            />
           </Switch>
         </BrowserRouter>
       </div>
