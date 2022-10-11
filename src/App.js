@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './components/Cart';
 import ProductDetails from './components/ProductDetails';
+import Checkout from './components/Checkout';
 
 class App extends Component {
   constructor() {
@@ -87,6 +88,9 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
+            <Route path="/checkout">
+              <Checkout />
+            </Route>
             <Route path="/cart">
               <Cart
                 favoriteList={ favoriteList }

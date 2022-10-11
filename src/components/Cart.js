@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import CartItemCard from './CartItemCard';
 
 class Cart extends Component {
@@ -19,6 +20,10 @@ class Cart extends Component {
               removeCartItem={ removeCartItem }
             />
           ))}
+
+        <button type="button">
+          <Link to="/checkout" data-testid="checkout-products"> Finalizar Compra </Link>
+        </button>
       </div>
     );
   }
