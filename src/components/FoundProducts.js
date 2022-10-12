@@ -6,7 +6,6 @@ import { getProductById } from '../services/api';
 class FoundProducts extends Component {
   handleClick = async ({ target }) => {
     const result = await getProductById(target.id);
-    console.log(target);
     return result;
   };
 
