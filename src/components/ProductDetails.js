@@ -116,57 +116,59 @@ class ProductDetails extends Component {
               value={ email }
             />
           </label>
-          <span>Nota:</span>
-          <label htmlFor="1">
-            1
-            <input
-              type="radio"
-              name="nota"
-              id="1"
-              data-testid="1-rating"
-              onChange={ this.handleChangeRadio }
-            />
-          </label>
-          <label htmlFor="2">
-            2
-            <input
-              type="radio"
-              name="nota"
-              id="2"
-              data-testid="2-rating"
-              onChange={ this.handleChangeRadio }
-            />
-          </label>
-          <label htmlFor="3">
-            3
-            <input
-              type="radio"
-              name="nota"
-              id="3"
-              data-testid="3-rating"
-              onChange={ this.handleChangeRadio }
-            />
-          </label>
-          <label htmlFor="4">
-            4
-            <input
-              type="radio"
-              name="nota"
-              id="4"
-              data-testid="4-rating"
-              onChange={ this.handleChangeRadio }
-            />
-          </label>
-          <label htmlFor="5">
-            5
-            <input
-              type="radio"
-              name="nota"
-              id="5"
-              data-testid="5-rating"
-              onChange={ this.handleChangeRadio }
-            />
-          </label>
+          <div>
+            <span>Nota:</span>
+            <label htmlFor="1">
+              1
+              <input
+                type="radio"
+                name="nota"
+                id="1"
+                data-testid="1-rating"
+                onChange={ this.handleChangeRadio }
+              />
+            </label>
+            <label htmlFor="2">
+              2
+              <input
+                type="radio"
+                name="nota"
+                id="2"
+                data-testid="2-rating"
+                onChange={ this.handleChangeRadio }
+              />
+            </label>
+            <label htmlFor="3">
+              3
+              <input
+                type="radio"
+                name="nota"
+                id="3"
+                data-testid="3-rating"
+                onChange={ this.handleChangeRadio }
+              />
+            </label>
+            <label htmlFor="4">
+              4
+              <input
+                type="radio"
+                name="nota"
+                id="4"
+                data-testid="4-rating"
+                onChange={ this.handleChangeRadio }
+              />
+            </label>
+            <label htmlFor="5">
+              5
+              <input
+                type="radio"
+                name="nota"
+                id="5"
+                data-testid="5-rating"
+                onChange={ this.handleChangeRadio }
+              />
+            </label>
+          </div>
           <span>Comentários</span>
           <input
             type="text"
