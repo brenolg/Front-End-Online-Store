@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import FoundProducts from './FoundProducts';
+import CartIcon from './CartIcon';
 
 class Home extends Component {
   state = {
@@ -43,7 +44,7 @@ class Home extends Component {
     const { productList,
       searched,
       listOfCategories } = this.state;
-    const { addToCar } = this.props;
+    const { addToCar, quantity } = this.props;
     return (
       <div>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
@@ -62,6 +63,7 @@ class Home extends Component {
             Buscar
           </button>
         </form>
+        <CartIcon quantity={ quantity } />
         <div>
           {listOfCategories.map((cat, index) => (
             <label
