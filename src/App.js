@@ -88,9 +88,8 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route path="/checkout">
-              <Checkout />
-            </Route>
+            <Route path="/checkout" component={ Checkout } />
+
             <Route path="/cart">
               <Cart
                 favoriteList={ favoriteList }

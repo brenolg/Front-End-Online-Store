@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class FormCheckout extends Component {
   constructor() {
@@ -32,12 +33,13 @@ class FormCheckout extends Component {
   };
 
   buy = () => {
+    const { push } = this.props;
     const { inputCheck } = this.state;
     if (inputCheck) {
       localStorage.clear('favoriteList');
+      this.setState({ clickCheck: true }, () => push('/'));
     }
-    const { history: { push } } = this.props;
-    this.setState({ clickCheck: true }, () => push('/'));
+    this.setState({ clickCheck: true });
   };
 
   render() {
@@ -178,5 +180,9 @@ class FormCheckout extends Component {
     );
   }
 }
+
+FormCheckout.propTypes = {
+  push: PropTypes.func.isRequired,
+};
 
 export default FormCheckout;

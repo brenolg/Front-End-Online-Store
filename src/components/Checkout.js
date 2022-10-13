@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import FormCheckout from './FormCheckout';
 
 class Checkout extends Component {
@@ -18,6 +19,7 @@ class Checkout extends Component {
 
   render() {
     const { favoriteList } = this.state;
+    const { history: { push } } = this.props;
     return (
 
       <div>
@@ -32,7 +34,7 @@ class Checkout extends Component {
                 <p>{listItem.price}</p>
               </div>
             ))}
-            <FormCheckout />
+            <FormCheckout push={ push } />
 
           </div>
         ) : (<h1>Seu carrinho está vazio</h1>)}
@@ -42,5 +44,11 @@ class Checkout extends Component {
     );
   }
 }
+
+Checkout.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Checkout;
