@@ -11,7 +11,7 @@ class CartIcon extends Component {
 }
 
 CartIcon.propTypes = {
-  quantity: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
 };
 
 export default CartIcon;

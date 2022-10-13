@@ -100,7 +100,7 @@ class Home extends Component {
 
 Home.propTypes = {
   addToCar: PropTypes.func.isRequired,
-  quantity: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
 };
 
 export default Home;

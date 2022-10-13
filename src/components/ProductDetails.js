@@ -7,6 +7,7 @@ import CartIcon from './CartIcon';
 class ProductDetails extends Component {
   state = {
     details: [],
+    freeShipping: false,
     radioTrue: false,
     email: '',
     emailTrue: false,
@@ -29,7 +30,9 @@ class ProductDetails extends Component {
   getProduct = async () => {
     const { match: { params } } = this.props;
     const result = await getProductById(params.id);
-    this.setState({ details: result });
+    this.setState({
+      details: result,
+      freeShipping: result.shipping.free_shipping });
   };
 
   saveLocalStorage = () => {
@@ -76,7 +79,7 @@ class ProductDetails extends Component {
 
   render() {
     const { details, disabled, campoValidado,
-      avaliacoes, email, text } = this.state;
+      avaliacoes, email, text, freeShipping } = this.state;
     const { addToCar, quantity } = this.props;
     return (
       <div>
@@ -87,6 +90,8 @@ class ProductDetails extends Component {
             alt={ details.title }
             data-testid="product-detail-image"
           />
+          {freeShipping && (
+            <p data-testid="free-shipping">Frete grátis</p>)}
           <p data-testid="product-detail-price" id={ details.price }>{details.price}</p>
           <p data-testid="product-detail-name" id={ details.title }>{details.title}</p>
           <button
@@ -213,7 +218,7 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   addToCar: PropTypes.func.isRequired,
-  quantity: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
 };
 
 export default ProductDetails;
