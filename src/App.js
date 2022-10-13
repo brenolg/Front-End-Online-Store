@@ -12,19 +12,29 @@ class App extends Component {
 
     this.state = {
       favoriteList: [],
+      quantity: 0,
     };
   }
 
   componentDidMount() {
     const favoriteList = JSON.parse(localStorage.getItem('favoriteList'));
+    const quantity = JSON.parse(localStorage.getItem('quantity'));
     if (favoriteList !== null) {
-      this.setState({ favoriteList });
+      this.setState({ favoriteList, quantity });
     }
   }
 
   saveLocalStorage = () => {
     const { favoriteList } = this.state;
     localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
+    this.changeStorageQuantity();
+  };
+
+  changeStorageQuantity = () => {
+    const favoriteList = JSON.parse(localStorage.getItem('favoriteList'));
+    const quantity = favoriteList.reduce((prev, curr) => curr.qtde + prev, 0);
+    localStorage.setItem('quantity', JSON.stringify(quantity));
+    this.setState({ quantity });
   };
 
   addToCar = ({ target }) => {
@@ -83,13 +93,12 @@ class App extends Component {
   };
 
   render() {
-    const { favoriteList } = this.state;
+    const { favoriteList, quantity } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
           <Switch>
             <Route path="/checkout" component={ Checkout } />
-
             <Route path="/cart">
               <Cart
                 favoriteList={ favoriteList }
@@ -99,12 +108,16 @@ class App extends Component {
               />
             </Route>
             <Route exact path="/">
-              <Home addToCar={ this.addToCar } />
+              <Home addToCar={ this.addToCar } quantity={ quantity } />
             </Route>
             <Route
               path="/product-details/:id"
               render={ (props) => (
-                <ProductDetails { ...props } addToCar={ this.addToCar } />
+                <ProductDetails
+                  { ...props }
+                  addToCar={ this.addToCar }
+                  quantity={ quantity }
+                />
               ) }
             />
           </Switch>

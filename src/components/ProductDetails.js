@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
+import CartIcon from './CartIcon';
 
 class ProductDetails extends Component {
   state = {
@@ -79,35 +80,38 @@ class ProductDetails extends Component {
   render() {
     const { details, disabled, campoValidado,
       avaliacoes, email, text, freeShipping } = this.state;
-    const { addToCar } = this.props;
+    const { addToCar, quantity } = this.props;
     return (
       <div>
-        <img
-          src={ details.thumbnail }
-          alt={ details.title }
-          data-testid="product-detail-image"
-        />
-        <p data-testid="product-detail-price" id={ details.price }>{details.price}</p>
-        <p data-testid="product-detail-name" id={ details.title }>{details.title}</p>
-        {freeShipping && (
-          <p data-testid="free-shipping">Frete grátis</p>)}
-        <button
-          type="button"
-          onClick={ addToCar }
-          data-testid="product-detail-add-to-cart"
-        >
-          Adicionar ao Carrinho
-        </button>
-        <button
-          type="button"
-        >
-          <Link
-            to="/cart"
-            data-testid="shopping-cart-button"
+        <CartIcon quantity={ quantity } />
+        <div>
+          <img
+            src={ details.thumbnail }
+            alt={ details.title }
+            data-testid="product-detail-image"
+          />
+          {freeShipping && (
+            <p data-testid="free-shipping">Frete grátis</p>)}
+          <p data-testid="product-detail-price" id={ details.price }>{details.price}</p>
+          <p data-testid="product-detail-name" id={ details.title }>{details.title}</p>
+          <button
+            type="button"
+            onClick={ addToCar }
+            data-testid="product-detail-add-to-cart"
           >
-            Carrinho de Compras
-          </Link>
-        </button>
+            Adicionar ao Carrinho
+          </button>
+          <button
+            type="button"
+          >
+            <Link
+              to="/cart"
+              data-testid="shopping-cart-button"
+            >
+              Carrinho de Compras
+            </Link>
+          </button>
+        </div>
         <form>
           <label htmlFor="email-input">
             E-mail
@@ -214,6 +218,7 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   addToCar: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
 };
 
 export default ProductDetails;
