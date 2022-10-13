@@ -18,6 +18,8 @@ class FoundProducts extends Component {
             <img src={ produto.thumbnail } alt={ produto.title } />
             <p id={ produto.price }>{produto.price}</p>
             <p id={ produto.title }>{produto.title}</p>
+            {produto.shipping.free_shipping && (
+              <p data-testid="free-shipping">Frete grátis</p>)}
             <button
               type="button"
               onClick={ addToCar }
