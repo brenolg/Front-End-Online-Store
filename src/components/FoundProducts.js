@@ -6,7 +6,6 @@ import { getProductById } from '../services/api';
 class FoundProducts extends Component {
   handleClick = async ({ target }) => {
     const result = await getProductById(target.id);
-    console.log(target);
     return result;
   };
 
@@ -19,6 +18,8 @@ class FoundProducts extends Component {
             <img src={ produto.thumbnail } alt={ produto.title } />
             <p id={ produto.price }>{produto.price}</p>
             <p id={ produto.title }>{produto.title}</p>
+            {produto.shipping.free_shipping && (
+              <p data-testid="free-shipping">Frete grátis</p>)}
             <button
               type="button"
               onClick={ addToCar }

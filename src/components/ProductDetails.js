@@ -6,6 +6,7 @@ import { getProductById } from '../services/api';
 class ProductDetails extends Component {
   state = {
     details: [],
+    freeShipping: false,
   };
 
   componentDidMount() {
@@ -15,11 +16,13 @@ class ProductDetails extends Component {
   getProduct = async () => {
     const { match: { params } } = this.props;
     const result = await getProductById(params.id);
-    this.setState({ details: result });
+    this.setState({
+      details: result,
+      freeShipping: result.shipping.free_shipping });
   };
 
   render() {
-    const { details } = this.state;
+    const { details, freeShipping } = this.state;
     const { addToCar } = this.props;
     return (
       <div>
@@ -30,6 +33,8 @@ class ProductDetails extends Component {
         />
         <p data-testid="product-detail-price" id={ details.price }>{details.price}</p>
         <p data-testid="product-detail-name" id={ details.title }>{details.title}</p>
+        {freeShipping && (
+          <p data-testid="free-shipping">Frete grátis</p>)}
         <button
           type="button"
           onClick={ addToCar }
