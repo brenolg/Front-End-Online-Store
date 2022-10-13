@@ -213,6 +213,7 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   addToCar: PropTypes.func.isRequired,
+  quantity: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;
