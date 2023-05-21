@@ -16,7 +16,8 @@ Este projeto, foi desenvolvido com uma versão simplificada, sem persistência n
 
 - React
 - Bootstrap
-- Jest
+- Lifecycle-methods
+- React Router
 
 ## Instalação do projeto localmente
 
@@ -25,7 +26,7 @@ Para instalar o projeto localmente, siga os seguintes passos:
 1. Clone o repositório usando 
 
 ```javascript
-git clone git@github.com:brenolg/front-end-online-store.git
+git clone git@github.com:brenolg/Front-End-Online-Store.git
 ```
 2. Instale as dependências usando 
 
