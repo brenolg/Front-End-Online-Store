@@ -4,6 +4,11 @@ Este é um projeto desenvolvido pelos estudantes da Trybe no curso de Desenvolvi
 
 Este projeto, foi desenvolvido com uma versão simplificada, sem persistência no banco de dados, de uma loja online, desenvolvendo em grupo suas funcionalidades de acordo com demandas definidas em um quadro Kanban.
 
+## Idealizadores
+<a href="https://github.com/brenolg/Front-End-Online-Store/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=brenolg/Front-End-Online-Store" />
+</a>
+
 ## Funcionalidades
 
 - Buscar produtos por termos e categorias a partir da API do Mercado Livre
