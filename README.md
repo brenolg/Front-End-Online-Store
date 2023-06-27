@@ -31,7 +31,7 @@ Para instalar o projeto localmente, siga os seguintes passos:
 1. Clone o repositório usando 
 
 ```javascript
-git clone git@github.com:brenolg/Front-End-Online-Store.git
+git clone git@github.com:brenolg/Front-End-Online-Store-REACT.git
 ```
 2. Instale as dependências usando 
 
